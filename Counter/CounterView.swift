@@ -13,23 +13,27 @@ struct CounterView: View {
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        VStack {
-            HStack {
-                ThemeToggle(action: {isLightModeOn.toggle()}, systemImage: isLightModeOn ? "moon" : "sun.max", isLightModeOn: isLightModeOn)
-            }
-            
-            Text("\(count)")
-                .padding()
-                .foregroundStyle(isLightModeOn ? .black : .white)
-            
-            HStack {
-                CounterButton(action: {count -= 1}, systemImage: "minus.circle", isLightModeOn: isLightModeOn)
+        ZStack {
+            (isLightModeOn ? Color.white : Color.black)
+                .ignoresSafeArea()
+            VStack {
+                HStack {
+                    ThemeToggle(action: {isLightModeOn.toggle()}, systemImage: isLightModeOn ? "moon" : "sun.max", isLightModeOn: isLightModeOn)
+                }
                 
-                CounterButton(action: {count += 1}, systemImage: "plus.circle", isLightModeOn: isLightModeOn)
+                Text("\(count)")
+                    .padding()
+                    .foregroundStyle(isLightModeOn ? .black : .white)
+                
+                HStack {
+                    CounterButton(action: {count -= 1}, systemImage: "minus.circle", isLightModeOn: isLightModeOn)
+                    
+                    CounterButton(action: {count += 1}, systemImage: "plus.circle", isLightModeOn: isLightModeOn)
+                }
             }
+            .font(.largeTitle)
+            .background(isLightModeOn ? .white : .black)
         }
-        .font(.largeTitle)
-        .background(isLightModeOn ? .white : .black)
     }
 }
 
