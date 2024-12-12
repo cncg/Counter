@@ -18,16 +18,18 @@ struct CounterView: View {
                 .ignoresSafeArea()
             VStack {
                 HStack {
+                    Spacer()
                     ThemeToggle(action: {isLightModeOn.toggle()}, systemImage: isLightModeOn ? "moon" : "sun.max", isLightModeOn: isLightModeOn)
                 }
-                
+                Spacer()
                 Text("\(count)")
                     .padding()
                     .foregroundStyle(isLightModeOn ? .black : .white)
+                Spacer()
                 
                 HStack {
                     CounterButton(action: {count -= 1}, systemImage: "minus.circle", isLightModeOn: isLightModeOn)
-                    
+                    Spacer()
                     CounterButton(action: {count += 1}, systemImage: "plus.circle", isLightModeOn: isLightModeOn)
                 }
             }
@@ -41,7 +43,7 @@ struct ThemeToggle: View {
     var action: () -> Void
     var systemImage: String
     var isLightModeOn: Bool
-    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         Button(action: action){
             Image(systemName: systemImage)
@@ -55,7 +57,7 @@ struct CounterButton: View {
     var action: () -> Void
     var systemImage: String
     var isLightModeOn: Bool
-    @Environment(\.colorScheme) var colorScheme
+
     var body: some View {
         Button(action: action){
             Image(systemName: systemImage)
