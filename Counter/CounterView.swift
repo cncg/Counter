@@ -15,14 +15,21 @@ struct CounterView: View {
     var body: some View {
         VStack {
             HStack {
-                //ThemeToggle
+                ThemeToggle(action: {isLightModeOn.toggle()}, systemImage: isLightModeOn ? "moon" : "sun.max", isLightModeOn: isLightModeOn)
             }
+            
             Text("\(count)")
                 .padding()
+                .foregroundStyle(isLightModeOn ? .black : .white)
+            
             HStack {
-                //CounterButton
+                CounterButton(action: {count -= 1}, systemImage: "minus.circle", isLightModeOn: isLightModeOn)
+                
+                CounterButton(action: {count += 1}, systemImage: "plus.circle", isLightModeOn: isLightModeOn)
             }
         }
+        .font(.largeTitle)
+        .background(isLightModeOn ? .white : .black)
     }
 }
 
